@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama Base de Datos Cosmere</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 1400px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .table {
+            stroke: #2a5298;
+            stroke-width: 2;
+            fill: white;
+        }
+        
+        .table-header {
+            fill: #2a5298;
+        }
+        
+        .table-name {
+            fill: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .field-text {
+            fill: #333;
+            font-size: 11px;
+        }
+        
+        .pk {
+            fill: #d4af37;
+            font-weight: bold;
+        }
+        
+        .fk {
+            fill: #4a90e2;
+        }
+        
+        .relation-line {
+            stroke: #4a90e2;
+            stroke-width: 2;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+        
+        .relation-label {
+            fill: #4a90e2;
+            font-size: 10px;
+            font-style: italic;
+        }
+        
+        .legend {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        
+        .legend-item {
+            display: inline-block;
+            margin-right: 20px;
+            font-size: 12px;
+        }
+        
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 12px;
+            margin-right: 5px;
+            vertical-align: middle;
+            border: 1px solid #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Diagrama de Base de Datos del Cosmere</h1>
+        <p class="subtitle">Brandon Sanderson Universe - MariaDB Schema</p>
+        
+        <svg viewBox="0 0 1300 900" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#4a90e2" />
+                </marker>
+            </defs>
+            
+            <!-- Tabla MUNDOS (arriba izquierda) -->
+            <g id="mundos">
+                <rect class="table" x="50" y="50" width="220" height="130" rx="5"/>
+                <rect class="table-header" x="50" y="50" width="220" height="35" rx="5"/>
+                <text class="table-name" x="160" y="73" text-anchor="middle">MUNDOS</text>
+                
+                <text class="field-text pk" x="60" y="100">🔑 id_mundo</text>
+                <text class="field-text" x="60" y="120">nombre</text>
+                <text class="field-text" x="60" y="140">descripcion</text>
+                <text class="field-text" x="60" y="160">created_at</text>
+            </g>
+            
+            <!-- Tabla LIBROS (arriba centro) -->
+            <g id="libros">
+                <rect class="table" x="350" y="50" width="250" height="170" rx="5"/>
+                <rect class="table-header" x="350" y="50" width="250" height="35" rx="5"/>
+                <text class="table-name" x="475" y="73" text-anchor="middle">LIBROS</text>
+                
+                <text class="field-text pk" x="360" y="100">🔑 id_libro</text>
+                <text class="field-text" x="360" y="120">titulo</text>
+                <text class="field-text" x="360" y="140">anio_publicacion</text>
+                <text class="field-text" x="360" y="160">numero_paginas</text>
+                <text class="field-text fk" x="360" y="180">🔗 id_mundo</text>
+                <text class="field-text" x="360" y="200">created_at</text>
+            </g>
+            
+            <!-- Tabla HABILIDADES (arriba derecha) -->
+            <g id="habilidades">
+                <rect class="table" x="1000" y="50" width="250" height="150" rx="5"/>
+                <rect class="table-header" x="1000" y="50" width="250" height="35" rx="5"/>
+                <text class="table-name" x="1125" y="73" text-anchor="middle">HABILIDADES</text>
+                
+                <text class="field-text pk" x="1010" y="100">🔑 id_habilidad</text>
+                <text class="field-text" x="1010" y="120">nombre</text>
+                <text class="field-text" x="1010" y="140">descripcion</text>
+                <text class="field-text" x="1010" y="160">tipo</text>
+                <text class="field-text" x="1010" y="180">created_at</text>
+            </g>
+            
+            <!-- Tabla PERSONAJES (centro) -->
+            <g id="personajes">
+                <rect class="table" x="480" y="350" width="280" height="210" rx="5"/>
+                <rect class="table-header" x="480" y="350" width="280" height="35" rx="5"/>
+                <text class="table-name" x="620" y="373" text-anchor="middle">PERSONAJES</text>
+                
+                <text class="field-text pk" x="490" y="400">🔑 id_personaje</text>
+                <text class="field-text" x="490" y="420">nombre</text>
+                <text class="field-text fk" x="490" y="440">🔗 id_libro</text>
+                <text class="field-text" x="490" y="460">genero</text>
+                <text class="field-text" x="490" y="480">imagen_url</text>
+                <text class="field-text" x="490" y="500">importancia</text>
+                <text class="field-text" x="490" y="520">rol</text>
+                <text class="field-text" x="490" y="540">created_at</text>
+            </g>
+            
+            <!-- Tabla LIBROS_PERSONAJES (abajo izquierda) -->
+            <g id="libros_personajes">
+                <rect class="table" x="150" y="680" width="280" height="110" rx="5"/>
+                <rect class="table-header" x="150" y="680" width="280" height="35" rx="5"/>
+                <text class="table-name" x="290" y="703" text-anchor="middle">LIBROS_PERSONAJES</text>
+                
+                <text class="field-text pk fk" x="160" y="730">🔑🔗 id_libro</text>
+                <text class="field-text pk fk" x="160" y="750">🔑🔗 id_personaje</text>
+                <text class="field-text" x="160" y="770" font-size="9" fill="#666">(Tabla intermedia muchos a muchos)</text>
+            </g>
+            
+            <!-- Tabla PERSONAJES_HABILIDADES (abajo centro) -->
+            <g id="personajes_habilidades">
+                <rect class="table" x="520" y="680" width="300" height="110" rx="5"/>
+                <rect class="table-header" x="520" y="680" width="300" height="35" rx="5"/>
+                <text class="table-name" x="670" y="703" text-anchor="middle">PERSONAJES_HABILIDADES</text>
+                
+                <text class="field-text pk fk" x="530" y="730">🔑🔗 id_personaje</text>
+                <text class="field-text pk fk" x="530" y="750">🔑🔗 id_habilidad</text>
+                <text class="field-text" x="530" y="770" font-size="9" fill="#666">(Tabla intermedia muchos a muchos)</text>
+            </g>
+            
+            <!-- Tabla MUNDOS_PERSONAJES (abajo derecha) -->
+            <g id="mundos_personajes">
+                <rect class="table" x="900" y="680" width="280" height="110" rx="5"/>
+                <rect class="table-header" x="900" y="680" width="280" height="35" rx="5"/>
+                <text class="table-name" x="1040" y="703" text-anchor="middle">MUNDOS_PERSONAJES</text>
+                
+                <text class="field-text pk fk" x="910" y="730">🔑🔗 id_mundo</text>
+                <text class="field-text pk fk" x="910" y="750">🔑🔗 id_personaje</text>
+                <text class="field-text" x="910" y="770" font-size="9" fill="#666">(Tabla intermedia muchos a muchos)</text>
+            </g>
+            
+            <!-- Relaciones -->
+            
+            <!-- MUNDOS -> LIBROS -->
+            <path class="relation-line" d="M 270 115 L 350 150"/>
+            <text class="relation-label" x="300" y="130">1:N</text>
+            
+            <!-- LIBROS -> PERSONAJES -->
+            <path class="relation-line" d="M 475 220 L 550 350"/>
+            <text class="relation-label" x="500" y="280">1:N</text>
+            
+            <!-- PERSONAJES -> LIBROS_PERSONAJES -->
+            <path class="relation-line" d="M 540 560 L 340 680"/>
+            <text class="relation-label" x="420" y="620">N:M</text>
+            
+            <!-- LIBROS -> LIBROS_PERSONAJES -->
+            <path class="relation-line" d="M 400 220 L 280 680"/>
+            <text class="relation-label" x="320" y="450">N:M</text>
+            
+            <!-- PERSONAJES -> PERSONAJES_HABILIDADES -->
+            <path class="relation-line" d="M 620 560 L 660 680"/>
+            <text class="relation-label" x="630" y="620">N:M</text>
+            
+            <!-- HABILIDADES -> PERSONAJES_HABILIDADES -->
+            <path class="relation-line" d="M 1050 200 L 750 680"/>
+            <text class="relation-label" x="880" y="440">N:M</text>
+            
+            <!-- PERSONAJES -> MUNDOS_PERSONAJES -->
+            <path class="relation-line" d="M 700 560 L 980 680"/>
+            <text class="relation-label" x="820" y="620">N:M</text>
+            
+            <!-- MUNDOS -> MUNDOS_PERSONAJES -->
+            <path class="relation-line" d="M 180 180 L 1000 680"/>
+            <text class="relation-label" x="580" y="430">N:M</text>
+            
+        </svg>
+        
+        <div class="legend">
+            <h3 style="margin-top: 0; color: #1e3c72;">Leyenda</h3>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #d4af37;"></span>
+                <span>🔑 Clave Primaria (PK)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #4a90e2;"></span>
+                <span>🔗 Clave Foránea (FK)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #2a5298;"></span>
+                <span>Cabecera de tabla</span>
+            </div>
+            <div class="legend-item">
+                <span style="color: #4a90e2; font-style: italic;">1:N</span>
+                <span>Relación uno a muchos</span>
+            </div>
+            <div class="legend-item">
+                <span style="color: #4a90e2; font-style: italic;">N:M</span>
+                <span>Relación muchos a muchos</span>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px; border-left: 4px solid #2a5298;">
+            <h4 style="margin-top: 0; color: #1e3c72;">📋 Descripción de Relaciones</h4>
+            <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px; line-height: 1.8;">
+                <li><strong>MUNDOS → LIBROS:</strong> Un mundo puede tener múltiples libros (1:N)</li>
+                <li><strong>LIBROS → PERSONAJES:</strong> Un libro introduce múltiples personajes (1:N)</li>
+                <li><strong>LIBROS ↔ PERSONAJES:</strong> Un personaje puede aparecer en varios libros y un libro tiene varios personajes (N:M)</li>
+                <li><strong>PERSONAJES ↔ HABILIDADES:</strong> Un personaje puede tener varias habilidades y una habilidad puede ser usada por varios personajes (N:M)</li>
+                <li><strong>MUNDOS ↔ PERSONAJES:</strong> Un personaje puede visitar varios mundos y un mundo tiene varios personajes (N:M)</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
